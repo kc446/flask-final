@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+    {% from 'bootstrap5/form.html' import render_form, render_field, render_form_row %}
+
+    <div class="row">
+        <div class="col-7">
+            <h2>Register</h2>
+            {{ render_form(form) }}
+        </div>
+        <div id="message" class="col-5">
+            <div id="letter" class="red">
+                Has lower case letter
+                <div class="progress">
+                    <div id="p-bar" class="progress-bar" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <style>
+        .invalid {
+            color: red;
+        }
+
+        .valid {
+            color: green;
+        }
+    </style>
+
+    <script type="javascript">
+
+        var passField = document.getElementById("password");
+        var letter = document.getElementById("letter");
+
+        let lowerCase = new Observable(0);
+        let upperCase = new Observable(0);
+        let specialChara = new Observable(0);
+        let passLength = new Observable(0);
+
+        let id="p-bar";
+
+        function Observable() {
+
+                this.value = v;
+
+                this.valueChangedCallback = null;
+                this.setValue = function (v) {
+                    if (this.value !== v) {
+                        this.value = v;
+                        this.raiseChangedEvent(v);
+                    }
+                }
+
+                this.getValue = function () {return this.value}
+
+                this.onChange = function (callback) {this.valueChangedCallback = callback;}
+
+                this.raiseChangedEvent = function (v) {
+                    if (this.valueChangedCallback) {this.valueChangedCallback(v);}
+                }
+            }
+
+        function setProgress(id,change) {
+                let progressBar = document.getElementById(id);
+                let currentWidthString = progressBar.style.width.toString()
+                let currentWidth = parseInt(currentWidth.substring(0,currentWidthString.length - 1));
+
+                let newWidthString =currentWidth + change;
+                console.log(newWidthString);
+                progressBar.style.width = newWidthString.toString().concat("%");
+            }
+
+        specialChara.onChange(function(v){
+            if (v === 0) {setProgress(id,-25)}
+            else {setProgress(id,+25)}
+        })
+
+        lowerCase.onChange(function (v){
+            if (v === 0) {setProgress(id,-25);}
+            else {setProgress(id,+25)}
+        })
+
+        upperCase.onChange(function (v){
+            if (v === 0) {setProgress(id,-25);}
+            else {setProgress(id,+25)}
+        })
+
+        passLength.onChange(function(v) {
+            if (v === 0) {setProgress(id,-25)}
+            else{setProgress(id,+25)}
+        })
+
+        passField.onFocus = function() {
+            var message = document.getElementById("message")
+            message.style.display = "block"
+            message.style.border = "1px solid";
+        }
+
+        passField.onkeyup = function () {
+
+            let lowerCaseLetters = /[a-z]/g;
+            let upperCaseLetters = /[A-Z]/g;
+            let specialCharacters = /[`~!@#$%^&*()_|+\-=?;:'",.<>{}]/g;
+            let passMinLength = 6;
+            
+            if (passField.value.length >= passMinLength) {passLength.setValue(1);}
+            else {passLength.setValue(0);}
+
+            // lowercase letters
+            if (passField.value.match(lowerCaseLetters)) {lowerCase.setValue(1);}
+            else {lowerCase.setValue(0);}
+
+            // uppercase letters
+            if (passField.value.match(upperCaseLetters)) {upperCase.setValue(1);}
+            else {upperCase.setValue(0);}
+
+            // special characters
+            if (passField.value.match(specialCharacters)) {specialChara.setValue(1);}
+            else {specialChara.setValue(0);}
+
+        }
+
+    </script>
+
+{% endblock %}
