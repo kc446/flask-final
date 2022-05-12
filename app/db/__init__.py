@@ -8,6 +8,11 @@ from app import config
 db = SQLAlchemy()
 database = Blueprint('database', __name__)
 
+def create_database(app):
+    if not path.exists('website/' + DB_NAME):
+        db.create_all(app=app)
+        print('Created Database!')
+
 def get_db():
     """Connect to the application's configured database.
     The connection is unique for each request and will be reused if this is called again."""

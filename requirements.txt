@@ -9,6 +9,7 @@ dill==0.3.4
 dnspython==2.2.1
 email-validator==1.2.1
 Flask==2.1.2
+Flask-CORS
 Flask-Login==0.6.1
 Flask-SQLAlchemy==2.5.1
 Flask-WTF==1.0.1
