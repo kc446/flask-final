@@ -18,7 +18,6 @@ from app.logging_config import log_con
 from app.simple_pages import simple_pages
 
 
-#mail = Mail()
 login_manager = flask_login.LoginManager()
 
 def create_app():
@@ -31,7 +30,7 @@ def create_app():
         app.config.from_object("app.config.DevelopmentConfig")
     elif app.config["ENV"] == "testing":
         app.config.from_object("app.config.TestingConfig")
-    #app.mail = Mail(app)
+
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/db.sqlite'
 
     login_manager.init_app(app)

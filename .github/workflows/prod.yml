@@ -39,7 +39,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: flask-final
+          images: kc446/flask-final
 
       - name: Build and push
         uses: docker/build-push-action@v2
