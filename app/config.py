@@ -13,10 +13,6 @@ class Config(object):
     UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', os.path.join(BASE_DIR,'..','uploads'))
     #GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY', 'NOKEY')
     LOG_DIR = os.path.join(BASE_DIR, '../logs')
-    #MAIL_SERVER = 'smtp.mailtrap.io'
-    #MAIL_PORT = 2525
-    #MAIL_USE_TLS = True
-    #MAIL_USE_SSL = False
 
 class ProductionConfig(Config):
     pass
