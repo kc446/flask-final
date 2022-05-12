@@ -3,7 +3,7 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap5
 from flask_cors import CORS
-from flask_mail import Mail
+#from flask_mail import Mail #pretty sure we don't actually need the mail stuff but i'll leave it in anyway
 from flask_wtf.csrf import CSRFProtect
 
 import flask_login
@@ -18,7 +18,7 @@ from app.logging_config import log_con
 from app.simple_pages import simple_pages
 
 
-mail = Mail()
+#mail = Mail()
 login_manager = flask_login.LoginManager()
 
 def create_app():
@@ -35,7 +35,7 @@ def create_app():
         app.config.from_object("app.config.DevelopmentConfig")
     elif app.config["ENV"] == "testing":
         app.config.from_object("app.config.TestingConfig")
-    app.mail = Mail(app)
+    #app.mail = Mail(app)
 
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
