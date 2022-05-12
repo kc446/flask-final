@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, current_app, abort
-from flask_mail import Message
+#from flask_mail import Message
 from werkzeug.security import generate_password_hash
 
 from app.auth.decorators import admin_required
@@ -27,9 +27,9 @@ def register():
                 db.session.add(user)
                 db.session.commit()
 
-            msg = Message("Hello", sender="from@example.com",recipients=["to@example.com"])
+            #msg = Message("Hello", sender="from@example.com",recipients=["to@example.com"])
 
-            current_app.mail.send(msg)
+            #current_app.mail.send(msg)
             flash("Congratulations, you are now a registered user!", 'Success!')
             return redirect(url_for('auth.login'), 302)
         else:
