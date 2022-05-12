@@ -24,10 +24,6 @@ login_manager = flask_login.LoginManager()
 def create_app():
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__)
-    #trying something here to see if it's the port for some reason
-    #if __name__ == "__main__":
-        #port = int(os.environ.get("PORT", 5000))
-        #app.run(host='0.0.0.0', port=port)
 
     if app.config["ENV"] == "production":
         app.config.from_object("app.config.ProductionConfig")
@@ -36,6 +32,7 @@ def create_app():
     elif app.config["ENV"] == "testing":
         app.config.from_object("app.config.TestingConfig")
     #app.mail = Mail(app)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/db.sqlite'
 
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"

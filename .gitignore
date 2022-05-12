@@ -1,6 +1,7 @@
 .idea
 .cache
 .local
+logs
 .pytest_cache
 .ash_history
 __pycache__
